@@ -10,6 +10,11 @@ def render_index_page():
 @app.route("/emotionDetector")
 def emotion_detector_route():
     text_to_analyze = request.args.get('textToAnalyze')
+    
+    # Handle blank input
+    if text_to_analyze == "":
+        return "Invalid input! Please try again."
+    
     response = emotion_detector(text_to_analyze)
     
     if response is None:
