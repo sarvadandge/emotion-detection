@@ -15,6 +15,10 @@ def emotion_detector(text_to_analyze):
     
     response = requests.post(url, json=input_json, headers=headers)
     
+    # Handle error (status code 400)
+    if response.status_code == 400:
+        return None
+
     if response.status_code == 200:
         emotions = response.json()["emotionPredictions"][0]["emotion"]
         
@@ -25,5 +29,5 @@ def emotion_detector(text_to_analyze):
             "joy": emotions["joy"],
             "sadness": emotions["sadness"]
         }
-    else:
-        return None
+    
+    return None
